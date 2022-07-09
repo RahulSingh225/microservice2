@@ -24,12 +24,14 @@ jobs:
         username: ${{env.DOCKER_NAME}}
         password: ${{env.DOCKER_TOKEN}}
         
-    - name: Build the Docker image
-      run: echo "Inside dev"
-    - name: Push the Docker Image
-     
+    - name: Build the Docker image Dev
+      if: ${{ github.ref == 'refs/heads/dev' }}
+      run: echo "Hello Dev"
+    - name: Build the Docker Image Master
+      if: ${{github.ref == 'refs/heads/master'}}
+      run: echo "Hello Master"
       
-  
+ 
              
             
            
