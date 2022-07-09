@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "dev" ]
 env: 
   DOCKER_NAME: blkhrt225
   DOCKER_TOKEN: ef55a328-fa2a-4b7b-b1f0-a560e8fea288
@@ -25,33 +25,11 @@ jobs:
         password: ${{env.DOCKER_TOKEN}}
         
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $IMAGE:$GITHUB_SHA
+      run: echo "Inside dev"
     - name: Push the Docker Image
-      run: docker push $IMAGE:$GITHUB_SHA
+     
       
-  deploy: 
-    needs: build
-    runs-on: ubuntu-latest
-    
-    steps:
-    
   
-      
-      - name: Deploy in EC2
-        env:
-            PRIVATE_KEY: ${{ secrets.AWS_PRIVATE_KEY  }}
-            HOSTNAME : ${{ secrets.HOSTNAME  }}
-            USER_NAME : ${{ secrets.USER_NAME  }}
-            
-        run: |
-          echo "${{ env.PRIVATE_KEY }}" | tr -d '\r' > key.pem && chmod 400 key.pem
-          ssh -i key.pem  -o "StrictHostKeyChecking no" $USER_NAME@$HOSTNAME <<'ENDSSH'
-           pwd
-           ls
-           cd microservice2
-           bash ../new.sh ${{github.sha}}
-           exit 
-            
              
             
            
