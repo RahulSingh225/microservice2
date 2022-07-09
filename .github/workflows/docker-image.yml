@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "dev" ]
 env: 
   DOCKER_NAME: blkhrt225
   DOCKER_TOKEN: ef55a328-fa2a-4b7b-b1f0-a560e8fea288
