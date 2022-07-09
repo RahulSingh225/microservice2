@@ -28,6 +28,7 @@ jobs:
       if: ${{ github.ref == 'refs/heads/dev' }}
       run: echo "Hello Dev"
     - name: Build the Docker Image Master
+      if: ${{github.ref == 'refs/heads/master'}}
       run: echo "Hello Master"
       
  
